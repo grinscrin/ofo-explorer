@@ -1,0 +1,35 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Folder {
+  id        Int      @id @default(autoincrement())
+  name      String
+  parent_id Int?     @map("parent_id")
+  parent    Folder?  @relation("ParentChildren", fields: [parent_id], references: [id], onDelete: Cascade)
+  children  Folder[] @relation("ParentChildren")
+  files     File[]
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@index([parent_id])
+  @@map("folders")
+}
+
+model File {
+  id         Int      @id @default(autoincrement())
+  name       String
+  folder_id  Int?     @map("folder_id")
+  folder     Folder?  @relation(fields: [folder_id], references: [id])
+  size       BigInt
+  type       String
+  created_at DateTime @default(now())
+
+  @@index([folder_id])
+  @@map("files")
+}
