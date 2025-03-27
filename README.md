@@ -1,2 +1,2 @@
-# ofo-explorer
-what an explorer
+# simple explorer
+just simple explorer
