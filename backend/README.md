@@ -1,4 +1,4 @@
-# OFO Explorer Backend API
+# Simple Explorer Backend API
 
 This backend provides a RESTful API for managing folders and files in a hierarchical structure.
 
